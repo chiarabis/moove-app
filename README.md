@@ -1,2 +1,4 @@
-# moove-app
-App di micromobilità condivisa sviluppata in TypeScript
+# MOOVE
+Una app di micromobilità condivisa sviluppata in TypeScript.
+---
+▰▰▰ 🚧 work in progress 🚧 ▰▰▰
