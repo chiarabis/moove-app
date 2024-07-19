@@ -25,7 +25,20 @@
             <li>Account</li>
         </ul>
 
-        <div class="hamburger"><img src="./assets/icons8-hamburger-menu-48.png"/></div>
+        <div style="background: aqua;">
+        <div class="hamburger" style="position: relative; padding: 0.5rem;">
+            <img src="./assets/icons8-hamburger-menu-48.png"/>
+            <div>L'idea</div>
+            <div>Come funziona</div>
+            <div>Account</div>
+
+            <!--<div style="position: absolute; top: 100%; right: 0; text-align: end; width: max-content;">
+                <div>L'idea</div>
+                <div>Come funziona</div>
+                <div>Account</div>
+            </div>-->
+        </div>
+        </div>
     </nav>
 
     <main>
@@ -37,11 +50,7 @@
 
             <div style="position: absolute; top: 35%;">
                 <label>Scegli la città:</label>
-                <select id="citta">
-                    <option value="citta1">Milano</option>
-                    <option value="citta2">Verona</option>
-                    <option value="citta3">Torino</option>
-                </select>
+                <select id="citta"></select>
             </div>
         </div>
 
@@ -60,8 +69,9 @@
             </div>
         </div>
             
-        <form id="form">
+        <form id="form" style="position: relative;">
             <h4 id="formTitolo" style="text-align: center; margin-bottom: 2rem;"></h4>
+            <img src="./assets/icons8-close-24.png" id="closeForm" class="close" style="margin: 1rem; position: absolute; top: 0; right: 0;"/>
             <div class="form-container flexrow">
                 <label for="firstname">Nome</label>
                 <input id="firstname" type="text" placeholder="Il tuo nome" required/>
@@ -134,15 +144,16 @@
         <div id="popupOverlay" class="popup-overlay"></div>
         <div id="popup" class="popup">
             <img src="./assets/icons8-close-24.png" id="closePopup" class="close"/>
-            <!--<p id="popupMessage"></p>-->
-            <h4>Prenotazione confermata:</h4>
-            <div>
+    
+            <div style="display: flex; flex-direction: column;">
+                <h4 style="margin-bottom: 1rem;">Prenotazione confermata:</h4>
                 <p id="popupNome"></p>
                 <p id="popupCognome"></p>
                 <p id="popupEmail"></p>
                 <p id="popupMetodoPagamento"></p>
                 <p id="popupTotale"></p>
             </div>
+            <p style="text-align: center; width: auto;">Grazie!</p>
         </div>
 
     </main>
