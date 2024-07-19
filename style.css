@@ -65,6 +65,28 @@ main{
     flex-direction: column;
     justify-content: center;
 }
+.slider{
+    position: relative;
+    width: fit-content;
+}
+.slider p{
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    width: max-content;
+    text-wrap: pretty;
+    height: fit-content;
+    text-align: center;
+    opacity: 0;
+    font-size: 0.8rem;
+    animation: slideAnimation 10s infinite;
+}
+.slider p:nth-child(1) {
+    animation-delay: 0s;
+}
+.slider p:nth-child(2) {
+    animation-delay: 5s;
+}
 .slideshow {
     position: relative;
     width: 100%;
@@ -128,8 +150,7 @@ main{
    justify-content: flex-end;
 }
 #mezziDisponibili{
-    justify-content: space-between;
-    /*width: 100%;*/
+    width: 100%;
 }
 #mezziDisponibili > p{
     font-weight: 700;
@@ -140,15 +161,17 @@ main{
     width: fit-content;
 }
 .table{
-    display: grid; 
+    /*display: grid; 
     gap: 2rem; 
     width: fit-content; 
     grid-template-columns: repeat(3,1fr); 
-    justify-items: start;
-    /*display: flex;
-    flex-direction: row;
+    justify-items: start;*/
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: space-between;
-    width: 100%;*/
+    gap: 1rem;
+    width: 100%;
 }
 .bg-colored{
     background-color: rgb(241, 10, 139);
@@ -211,6 +234,12 @@ p{
     text-align: start;
 }
 
+@keyframes slide {
+    0%, 20% { opacity: 1; }
+    25%, 95% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 form{
     display: none;
     flex-direction: column;
@@ -268,13 +297,12 @@ form input[type="number"]{
     border-radius: 1rem;
     z-index: 1000;
 }
-.popup .close {
-    float: right;
-    cursor: pointer;
-}
 .close{
-    /*width: 1.2rem;*/
-    margin-bottom: 1rem;
+    cursor: pointer;
+    float: right;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-left: 3rem;
 }
 .popup-overlay {
     display: none;
@@ -295,34 +323,29 @@ form input[type="number"]{
 
 
 @media (max-width: 1200px){
-    .add{
-        display: flex;
-        flex-direction: column;
-        width: fit-content;
-        height: 100px;
+     /*.add{
+       display: flex;
+        flex-direction: row;//flex-direction: column;
+        width: 100%; //width: fit-content;
+        //height: 100px;
         justify-content: space-between;
         margin-left: 1rem;
-    }
+    }*/
 }
 @media (max-width: 1104px){
-    .table{
+    /*.table{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
-    }
+    }*/
 }
 @media (max-width: 1024px){
-    #mezziDisponibili{
-        width: auto;
-    }
     .add{
         flex-direction: row;
         height: auto;
-    }
-    .table{
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 1rem;
+        width: 100%;
+        justify-content: space-between;
+        margin-left: 1rem;
     }
 }
 @media (max-width: 868px){
@@ -354,6 +377,9 @@ form input[type="number"]{
         margin-left: 3px;
         margin-top: 1rem;
     }
+    form{
+        width: auto;
+    }
 }
 @media(max-width: 480px){
     body{
@@ -368,6 +394,9 @@ form input[type="number"]{
     }
     #mezziInfo{
         margin: 0 2rem 2rem;
+    }
+    form{
+        margin: 2rem;
     }
 }
 @media (max-width: 400px){
