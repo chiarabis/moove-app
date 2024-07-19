@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
             option.textContent = citta[key].nome;
             selectCitta.appendChild(option);
         }
-    }
+    };
 
     function aggiornaMezziDiv(citta: Citta) {
         const mezzi = citta.mezziDisponibili;
@@ -198,46 +198,45 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="table">${mezziHTML}
             </div>
         `;*/
-/*`<div class="slideshow">${mezzo.utenteAssegnato ?
-<span class="prenotato">In uso da ${mezzo.utenteAssegnato.nome} ${mezzo.utenteAssegnato.cognome}</span>
-: ''}</div>`*/
-    const mezziHTML = mezzi.map(mezzo => {
-        if (mezzo.statoDisponibile) {
-            return `
+        /*`<div class="slideshow">${mezzo.utenteAssegnato ?
+        <span class="prenotato">In uso da ${mezzo.utenteAssegnato.nome} ${mezzo.utenteAssegnato.cognome}</span>
+        : ''}</div>`*/
+        const mezziHTML = mezzi.map(mezzo => {
+            if (mezzo.statoDisponibile) {
+                return `
+                    <div class="flexrow">
+                        <div class="flexrow idBox">
+                            <p style="text-transform: capitalize;">${mezzo.tipo}</p>
+                            <p class="bg-colored" style="margin-left: 3px;">ID: ${mezzo.id}</p>
+                        </div>
+                        <span style="margin: 0 10px; color: rgb(9,181,32);">●</span>
+                        <button class="formBtn" data-id="${mezzo.id}">Prenota</button>
+                        ${mezzo.aggiuntoDaUtente ? `<button class="rimuoviMezzoBtn" data-id="${mezzo.id}"><img src="./assets/icons8-bin-24.png"/></button>` : ''}
+                    </div>`;
+            } else {
+                let userHTML = '';
+                if (mezzo.utenteAssegnato) {
+                    userHTML = `<p class="status">In uso da 
+                        ${capitalizeFirstLetter(mezzo.utenteAssegnato.nome)} ${capitalizeFirstLetter(mezzo.utenteAssegnato.cognome)}
+                    </p>`;
+                } 
+                return `
                 <div class="flexrow">
                     <div class="flexrow idBox">
                         <p style="text-transform: capitalize;">${mezzo.tipo}</p>
                         <p class="bg-colored" style="margin-left: 3px;">ID: ${mezzo.id}</p>
                     </div>
-                    <span style="margin: 0 10px; color: rgb(9,181,32);">●</span>
-                    <button class="formBtn" data-id="${mezzo.id}">Prenota</button>
+                    <span style="margin: 0 10px; color: rgb(234,12,12);">●</span>
+                    <div class="slider">
+                        ${userHTML}
+                        <p class="status">Non disponibile</p>
+                    </div>
                 </div>`;
-        } else {
-            let userHTML = '';
-            if (mezzo.utenteAssegnato) {
-                userHTML = `<p class="status">In uso da 
-                    ${capitalizeFirstLetter(mezzo.utenteAssegnato.nome)} ${capitalizeFirstLetter(mezzo.utenteAssegnato.cognome)}
-                    </p>`;
-            } 
-            return `
-            <div class="flexrow">
-                <div class="flexrow idBox">
-                    <p style="text-transform: capitalize;">${mezzo.tipo}</p>
-                    <p class="bg-colored" style="margin-left: 3px;">ID: ${mezzo.id}</p>
-                </div>
-                <span style="margin: 0 10px; color: rgb(234,12,12);">●</span>
-                <div class="slider">
-                    ${userHTML}
-                    <p class="status">Non disponibile</p>
-                </div>
-            </div>`;
-        }
+            }
         }).join('');
-        mezziDisponibiliDiv.innerHTML = `
-            <p>Mezzi disponibili a ${citta.nome}</p>
-            <div class="table">${mezziHTML}
-            </div>
-        `;
+        
+        mezziDisponibiliDiv.innerHTML = `<p>Mezzi disponibili a ${citta.nome}</p><div class="table">${mezziHTML}</div>`;
+
 
         const rimuoviMezzoBtn = document.querySelectorAll('.rimuoviMezzoBtn');
         rimuoviMezzoBtn.forEach(btn => {
@@ -271,6 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             })
         });
+        
 
         const prenotaMezzoBtn = document.querySelectorAll('.prenotaMezzoBtn');
         prenotaMezzoBtn.forEach(btn => {
@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         });
-    }
+    };
 
     function prenotaMezzo(citta: Citta, id: string) {
         const mezzo = citta.mezziDisponibili.find(mezzo => mezzo.id === id);
@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             console.error(`Non è possibile prenotare il mezzo ID ${id}.`);
         }
-    }
+    };
 
     selectCitta.addEventListener('change', () => {
         const optionCitta = selectCitta.value;
@@ -305,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }else{
             console.error(`Città non valida: ${optionCitta}`);
         }
-    })
+    });
 
     aggiungiMezzoBtn.addEventListener('click', () => {
         const optionCitta = selectCitta.value;
@@ -346,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         totalAmount.textContent = `${totale.toFixed(2)} €`;
-    }
+    };
 
     form.addEventListener('input', () => {
         const mezzoId = form.querySelector('h4')?.textContent?.match(/ID: (\w+)/)?.[1];
@@ -391,10 +391,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const popupTotale = document.getElementById('popupTotale') as HTMLParagraphElement;
 
     function showPopup(nome: string, cognome: string, email: string, metodoPagamento: string, totale: number) {
-        /*function capitalizeFirstLetter(string: string){
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        };*/
-
         popupNome.textContent = `Nome: ${capitalizeFirstLetter(nome)}`;
         popupCognome.textContent = `Cognome: ${capitalizeFirstLetter(cognome)}`;
         popupEmail.textContent = `Email: ${email}`;
@@ -450,5 +446,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 aggiornaMezziDiv(selectedCitta);
             }
         }
+    });
+
+    const closeForm = document.getElementById('closeForm');
+    closeForm?.addEventListener('click', ()=> {
+        form.style.display = 'none';
     });
 });
