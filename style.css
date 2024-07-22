@@ -35,7 +35,7 @@ h1{
 .title img{
     height: 90px;
 }
-ul{
+.nav-menu{
     list-style-type:none;
     display: flex;
     flex-direction: row;
@@ -43,21 +43,20 @@ ul{
     justify-content: space-between;
     width: 350px;
     transform: translateY(-8px);
+    z-index: 10;
 }
-ul li{
+.nav-menu li{
     cursor: pointer;
     border-radius: 80px;
     border: 1px solid rgb(18, 89, 22);
     padding: 5px 10px;
 }
-ul li:hover{
+.nav-menu li:hover{
     background-color: rgb(18, 89, 22);
     color: rgb(245,245,245);
 }
 .hamburger{
     display: none;
-}
-.hamburger img{
     width: 40px;
 }
 main{
@@ -161,11 +160,6 @@ main{
     width: fit-content;
 }
 .table{
-    /*display: grid; 
-    gap: 2rem; 
-    width: fit-content; 
-    grid-template-columns: repeat(3,1fr); 
-    justify-items: start;*/
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -213,77 +207,6 @@ p{
     margin: 3px 0;
     width: fit-content;
 }
-.prenotaMezzoBtn, .formBtn{
-    cursor: pointer;
-    border-radius: 1rem;
-    border: 1px solid rgb(18, 89, 22);
-    padding: 5px 10px;
-    line-height: 1;
-    font-family: "Comfortaa", sans-serif;
-    font-size: 0.8rem;
-    color: rgb(18, 89, 22);
-    width: fit-content;
-}
-.prenotaMezzoBtn:hover, .prenotaMezzoBtn:active, .formBtn:hover, .formBtn:active{
-    background-color: rgb(18, 89, 22);
-    color: rgb(245, 245, 245);
-}
-.status{
-    color: rgb(234, 12, 12);
-    font-size: 0.8rem;
-    text-align: start;
-}
-
-@keyframes slide {
-    0%, 20% { opacity: 1; }
-    25%, 95% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-form{
-    display: none;
-    flex-direction: column;
-    background-color: rgb(165, 189, 167); 
-    padding: 1rem;
-    border-radius: 1rem;
-    margin: 2rem 0;
-    width: 400px;
-}
-form input[type="text"], form input[type="email"]{
-    background-color: rgba(245,245,245, 0.5);
-    border: none;
-    padding: 5px 10px;
-    border-radius: 1rem;
-    width: 100%;
-    margin-left: 3px;
-    font-size: 0.8rem;
-    font-family: "Comfortaa", sans-serif;
-    color: rgb(18, 89, 22);
-    outline-style:none;
-}
-form input[type="text"]{
-    text-transform: capitalize;
-}
-form input[type="text"]::placeholder, form input[type="email"]::placeholder{
-    color: rgb(165, 189, 167);
-}
-form input[type="number"]{
-    background-color: rgba(245,245,245, 0.5);
-    border: none;
-    padding: 5px 10px;
-    outline-style:none;
-}
-.form-container{
-    margin: 0.5rem 0;
-}
-.box{
-    background-color: rgba(245,245,245, 0.5);
-    padding: 5px 10px;
-    border-radius: 1rem;   
-}
-.box legend, .box div{
-    margin: 0.5rem 0;
-}
 .popup {
     display: none;
     position: fixed;
@@ -320,25 +243,6 @@ form input[type="number"]{
 
 
 
-
-
-@media (max-width: 1200px){
-     /*.add{
-       display: flex;
-        flex-direction: row;//flex-direction: column;
-        width: 100%; //width: fit-content;
-        //height: 100px;
-        justify-content: space-between;
-        margin-left: 1rem;
-    }*/
-}
-@media (max-width: 1104px){
-    /*.table{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }*/
-}
 @media (max-width: 1024px){
     .add{
         flex-direction: row;
@@ -349,8 +253,24 @@ form input[type="number"]{
     }
 }
 @media (max-width: 868px){
-    nav ul{
-        display: none;
+    .nav-menu{
+        display: flex; /*none*/
+        flex-direction: column;
+        align-items: flex-end;
+        background-color: rgb(165, 189, 167);
+        position: absolute;
+        top: 100%;
+        transform: translateY(0%);
+        right: 0;
+        width: max-content;
+        padding: 10px;
+        border-radius: 3px;
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+    .nav-menu li{
+        margin: 10px 0;
     }
     .hamburger{
         display: block;
@@ -377,8 +297,8 @@ form input[type="number"]{
         margin-left: 3px;
         margin-top: 1rem;
     }
-    form{
-        width: auto;
+    .popup{
+        width: 70%;
     }
 }
 @media(max-width: 480px){
@@ -395,14 +315,19 @@ form input[type="number"]{
     #mezziInfo{
         margin: 0 2rem 2rem;
     }
-    form{
-        margin: 2rem;
-    }
 }
 @media (max-width: 400px){
     nav{
         flex-direction: column;
         align-items: center;
+    }
+    .nav-menu{
+        align-items: center;
+        top: 100%;
+        transform: translateY(0%);
+        right: 50%;
+        transform: translateX(50%);
+        width: max-content;
     }
     .title{
         align-items: center;
