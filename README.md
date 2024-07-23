@@ -137,8 +137,6 @@ class Citta implements ICitta{
 ## Deploy
 ![Progetto senza titolo (8)](https://github.com/user-attachments/assets/f86d299d-cb2e-4f17-867c-c2552d523b5b)
 
-Link alla demo:
+[Clicca qui](https://mooveapp.netlify.app/) per vedere il progetto in live 🌐
 
-
-
-▰▰▰ 🚧 work in progress 🚧 ▰▰▰
+_Deploy by Netlify_
