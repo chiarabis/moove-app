@@ -1,0 +1,76 @@
+form{
+    display: none;
+    flex-direction: column;
+    background-color: rgb(165, 189, 167); 
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 2rem 0;
+    width: 400px;
+}
+form input[type="text"], form input[type="email"]{
+    background-color: rgba(245,245,245, 0.5);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 1rem;
+    width: 100%;
+    margin-left: 3px;
+    font-size: 0.8rem;
+    font-family: "Comfortaa", sans-serif;
+    color: rgb(18, 89, 22);
+    outline-style:none;
+}
+form input[type="text"]{
+    text-transform: capitalize;
+}
+form input[type="text"]::placeholder, form input[type="email"]::placeholder{
+    color: rgb(165, 189, 167);
+}
+form input[type="number"]{
+    background-color: rgba(245,245,245, 0.5);
+    border: none;
+    padding: 5px 10px;
+    outline-style:none;
+}
+.box{
+    background-color: rgba(245,245,245, 0.5);
+    padding: 5px 10px;
+    border-radius: 1rem;   
+}
+.box legend, .box div{
+    margin: 0.5rem 0;
+}
+.form-container{
+    margin: 0.5rem 0;
+}
+.prenotaMezzoBtn, .formBtn{
+    cursor: pointer;
+    border-radius: 1rem;
+    border: 1px solid rgb(18, 89, 22);
+    padding: 5px 10px;
+    line-height: 1;
+    font-family: "Comfortaa", sans-serif;
+    font-size: 0.8rem;
+    color: rgb(18, 89, 22);
+    width: fit-content;
+}
+.prenotaMezzoBtn:hover, .prenotaMezzoBtn:active, .formBtn:hover, .formBtn:active{
+    background-color: rgb(18, 89, 22);
+    color: rgb(245, 245, 245);
+}
+.status{
+    color: rgb(234, 12, 12);
+    font-size: 0.8rem;
+    text-align: start;
+}
+
+
+@media (max-width: 640px){
+    form{
+        width: auto;
+    }
+}
+@media(max-width: 480px){
+    form{
+        margin: 2rem;
+    }
+}
