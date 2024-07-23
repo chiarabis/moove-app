@@ -315,6 +315,9 @@ p{
     #mezziInfo{
         margin: 0 2rem 2rem;
     }
+    .slider p{
+        width: 180px;
+    }
 }
 @media (max-width: 400px){
     nav{
