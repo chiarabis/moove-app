@@ -141,9 +141,9 @@ function generaIdMezzo(tipo: string): string {
 }
 
 const utenti: {[key: string]: Utente} = {
-    utente1: new Utente('mario', 'rossi', 'mario.rossi@example.com', 'carta di credito'),
-    utente2: new Utente('luca', 'bianchi', 'luca.bianchi@example.com', 'paypal'),
-    utente3: new Utente('sara', 'verdi', 'sara.verdi@example.com', 'satispay'),
+    utente1: new Utente('galileo', 'galilei', 'galile.o.i@example.com', 'carta di credito'),
+    utente2: new Utente('frida', 'khalo', 'frida.khalo@example.com', 'paypal'),
+    utente3: new Utente('alessandro', 'magno', 'ale.magno@example.com', 'satispay'),
 }
 
 const citta: {[key: string]: Citta} = {
@@ -168,6 +168,32 @@ document.addEventListener("DOMContentLoaded", () => {
     function capitalizeFirstLetter(string: string){
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
+
+    const hamburger = document.querySelector('.hamburger') as HTMLDivElement;
+    const navMenu = document.querySelector('.nav-menu') as HTMLUListElement;
+    const hamburgerIcon = document.getElementById('hamburger-icon') as HTMLImageElement;
+    
+    hamburger.addEventListener('click', () => {
+        if (navMenu.style.opacity === '1') {
+            navMenu.style.opacity = '0';
+            navMenu.style.pointerEvents = 'none';
+            hamburgerIcon.src = './assets/hamburger.png';
+        } else {
+            navMenu.style.opacity = '1';
+            navMenu.style.pointerEvents = 'auto';
+            hamburgerIcon.src = './assets/close.png';
+        }
+    });
+    /*
+    hamburger.addEventListener('click', () => {
+        if (navMenu.style.display === 'none' || navMenu.style.display === '') {
+            navMenu.style.display = 'flex';
+            hamburgerIcon.src = './assets/icons8-close-48.png';
+        } else {
+            navMenu.style.display = 'none';
+            hamburgerIcon.src = './assets/icons8-hamburger-menu-48.png';
+        }
+    });*/
 
     for (const key in citta) {
         if (citta.hasOwnProperty(key)) {
@@ -211,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <span style="margin: 0 10px; color: rgb(9,181,32);">●</span>
                         <button class="formBtn" data-id="${mezzo.id}">Prenota</button>
-                        ${mezzo.aggiuntoDaUtente ? `<button class="rimuoviMezzoBtn" data-id="${mezzo.id}"><img src="./assets/icons8-bin-24.png"/></button>` : ''}
+                        ${mezzo.aggiuntoDaUtente ? `<button class="rimuoviMezzoBtn" data-id="${mezzo.id}"><img src="./assets/bin.png"/></button>` : ''}
                     </div>`;
             } else {
                 let userHTML = '';
@@ -271,7 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         });
         
-
         const prenotaMezzoBtn = document.querySelectorAll('.prenotaMezzoBtn');
         prenotaMezzoBtn.forEach(btn => {
             btn.addEventListener('click', (event) => {
@@ -344,7 +369,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const mesi = parseInt((document.getElementById('totalMonths') as HTMLInputElement).value) || 0;
             totale = mesi * mezzo.getTariffaMensile();
         }
-
         totalAmount.textContent = `${totale.toFixed(2)} €`;
     };
 
@@ -379,8 +403,9 @@ document.addEventListener("DOMContentLoaded", () => {
             aggiornaMezziDiv(initialCitta);
             mezziInfo.style.display = 'flex';
         }
-    }
+    };
     
+    //popup pagamento confermato
     const popupOverlay = document.getElementById('popupOverlay') as HTMLDivElement;
     const popup = document.getElementById('popup') as HTMLDivElement;
     const closePopup = document.getElementById('closePopup') as HTMLSpanElement;
@@ -408,6 +433,7 @@ document.addEventListener("DOMContentLoaded", () => {
     closePopup.addEventListener('click', hidePopup);
     popupOverlay.addEventListener('click', hidePopup);
 
+    //invio form di prenotazione
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         const selectedCitta = citta[selectCitta.value];
@@ -444,6 +470,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 form.style.display = 'none';
                 aggiornaMezziDiv(selectedCitta);
+
+                form.reset();
             }
         }
     });
