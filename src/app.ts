@@ -184,16 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
             hamburgerIcon.src = './assets/close.png';
         }
     });
-    /*
-    hamburger.addEventListener('click', () => {
-        if (navMenu.style.display === 'none' || navMenu.style.display === '') {
-            navMenu.style.display = 'flex';
-            hamburgerIcon.src = './assets/icons8-close-48.png';
-        } else {
-            navMenu.style.display = 'none';
-            hamburgerIcon.src = './assets/icons8-hamburger-menu-48.png';
-        }
-    });*/
 
     for (const key in citta) {
         if (citta.hasOwnProperty(key)) {
@@ -206,27 +196,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function aggiornaMezziDiv(citta: Citta) {
         const mezzi = citta.mezziDisponibili;
-        /*const mezziHTML = mezzi.map(mezzo => `
-            <div class="flexrow">
-                <div class="flexrow idBox">
-                    <p style="text-transform: capitalize;">${mezzo.tipo}</p>
-                    <p class="bg-colored" style="margin-left: 3px;">ID: ${mezzo.id}</p>
-                </div>
-                <span style="margin: 0 10px; color: ${mezzo.statoDisponibile ? 'rgb(9,181,32)' : 'rgb(234,12,12)'};">●</span>
-                
-                ${mezzo.statoDisponibile ? `<button class="formBtn" data-id="${mezzo.id}">Prenota</button>`
-                    : '<span class="status">Non disponibile</span>'}
-                ${mezzo.aggiuntoDaUtente ? `<button class="rimuoviMezzoBtn" data-id="${mezzo.id}"><img src="./assets/icons8-bin-24.png"/></button>` : ''}
-            </div>
-            `).join('');
-        mezziDisponibiliDiv.innerHTML = `
-            <p>Mezzi disponibili a ${citta.nome}</p>
-            <div class="table">${mezziHTML}
-            </div>
-        `;*/
-        /*`<div class="slideshow">${mezzo.utenteAssegnato ?
-        <span class="prenotato">In uso da ${mezzo.utenteAssegnato.nome} ${mezzo.utenteAssegnato.cognome}</span>
-        : ''}</div>`*/
         const mezziHTML = mezzi.map(mezzo => {
             if (mezzo.statoDisponibile) {
                 return `
