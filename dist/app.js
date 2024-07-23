@@ -86,9 +86,9 @@ function generaIdMezzo(tipo) {
     return `${tipo.charAt(0)}${globalMezzoCounters[tipo]}`;
 }
 const utenti = {
-    utente1: new Utente('mario', 'rossi', 'mario.rossi@example.com', 'carta di credito'),
-    utente2: new Utente('luca', 'bianchi', 'luca.bianchi@example.com', 'paypal'),
-    utente3: new Utente('sara', 'verdi', 'sara.verdi@example.com', 'satispay'),
+    utente1: new Utente('galileo', 'galilei', 'galile.o.i@example.com', 'carta di credito'),
+    utente2: new Utente('frida', 'khalo', 'frida.khalo@example.com', 'paypal'),
+    utente3: new Utente('alessandro', 'magno', 'ale.magno@example.com', 'satispay'),
 };
 const citta = {
     citta1: new Citta('Milano', [mezzi.bici1, mezzi.scooter1, mezzi.monopattino1]),
@@ -110,6 +110,31 @@ document.addEventListener("DOMContentLoaded", () => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
     ;
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    hamburger.addEventListener('click', () => {
+        if (navMenu.style.opacity === '1') {
+            navMenu.style.opacity = '0';
+            navMenu.style.pointerEvents = 'none';
+            hamburgerIcon.src = './assets/hamburger.png';
+        }
+        else {
+            navMenu.style.opacity = '1';
+            navMenu.style.pointerEvents = 'auto';
+            hamburgerIcon.src = './assets/close.png';
+        }
+    });
+    /*
+    hamburger.addEventListener('click', () => {
+        if (navMenu.style.display === 'none' || navMenu.style.display === '') {
+            navMenu.style.display = 'flex';
+            hamburgerIcon.src = './assets/icons8-close-48.png';
+        } else {
+            navMenu.style.display = 'none';
+            hamburgerIcon.src = './assets/icons8-hamburger-menu-48.png';
+        }
+    });*/
     for (const key in citta) {
         if (citta.hasOwnProperty(key)) {
             const option = document.createElement('option');
@@ -118,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
             selectCitta.appendChild(option);
         }
     }
+    ;
     function aggiornaMezziDiv(citta) {
         const mezzi = citta.mezziDisponibili;
         /*const mezziHTML = mezzi.map(mezzo => `
@@ -144,41 +170,38 @@ document.addEventListener("DOMContentLoaded", () => {
         const mezziHTML = mezzi.map(mezzo => {
             if (mezzo.statoDisponibile) {
                 return `
-                <div class="flexrow">
-                    <div class="flexrow idBox">
-                        <p style="text-transform: capitalize;">${mezzo.tipo}</p>
-                        <p class="bg-colored" style="margin-left: 3px;">ID: ${mezzo.id}</p>
-                    </div>
-                    <span style="margin: 0 10px; color: rgb(9,181,32);">●</span>
-                    <button class="formBtn" data-id="${mezzo.id}">Prenota</button>
-                </div>`;
+                    <div class="flexrow">
+                        <div class="flexrow idBox">
+                            <p style="text-transform: capitalize;">${mezzo.tipo}</p>
+                            <p class="bg-colored" style="margin-left: 3px;">ID: ${mezzo.id}</p>
+                        </div>
+                        <span style="margin: 0 10px; color: rgb(9,181,32);">●</span>
+                        <button class="formBtn" data-id="${mezzo.id}">Prenota</button>
+                        ${mezzo.aggiuntoDaUtente ? `<button class="rimuoviMezzoBtn" data-id="${mezzo.id}"><img src="./assets/bin.png"/></button>` : ''}
+                    </div>`;
             }
             else {
                 let userHTML = '';
                 if (mezzo.utenteAssegnato) {
                     userHTML = `<p class="status">In uso da 
-                    ${capitalizeFirstLetter(mezzo.utenteAssegnato.nome)} ${capitalizeFirstLetter(mezzo.utenteAssegnato.cognome)}
+                        ${capitalizeFirstLetter(mezzo.utenteAssegnato.nome)} ${capitalizeFirstLetter(mezzo.utenteAssegnato.cognome)}
                     </p>`;
                 }
                 return `
-            <div class="flexrow">
-                <div class="flexrow idBox">
-                    <p style="text-transform: capitalize;">${mezzo.tipo}</p>
-                    <p class="bg-colored" style="margin-left: 3px;">ID: ${mezzo.id}</p>
-                </div>
-                <span style="margin: 0 10px; color: rgb(234,12,12);">●</span>
-                <div class="slider">
-                    ${userHTML}
-                    <p class="status">Non disponibile</p>
-                </div>
-            </div>`;
+                <div class="flexrow">
+                    <div class="flexrow idBox">
+                        <p style="text-transform: capitalize;">${mezzo.tipo}</p>
+                        <p class="bg-colored" style="margin-left: 3px;">ID: ${mezzo.id}</p>
+                    </div>
+                    <span style="margin: 0 10px; color: rgb(234,12,12);">●</span>
+                    <div class="slider">
+                        ${userHTML}
+                        <p class="status">Non disponibile</p>
+                    </div>
+                </div>`;
             }
         }).join('');
-        mezziDisponibiliDiv.innerHTML = `
-            <p>Mezzi disponibili a ${citta.nome}</p>
-            <div class="table">${mezziHTML}
-            </div>
-        `;
+        mezziDisponibiliDiv.innerHTML = `<p>Mezzi disponibili a ${citta.nome}</p><div class="table">${mezziHTML}</div>`;
         const rimuoviMezzoBtn = document.querySelectorAll('.rimuoviMezzoBtn');
         rimuoviMezzoBtn.forEach(btn => {
             btn.addEventListener('click', (event) => {
@@ -222,6 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+    ;
     function prenotaMezzo(citta, id) {
         const mezzo = citta.mezziDisponibili.find(mezzo => mezzo.id === id);
         if (mezzo && mezzo.statoDisponibile) {
@@ -232,6 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error(`Non è possibile prenotare il mezzo ID ${id}.`);
         }
     }
+    ;
     selectCitta.addEventListener('change', () => {
         const optionCitta = selectCitta.value;
         const selectedCitta = citta[optionCitta];
@@ -280,6 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         totalAmount.textContent = `${totale.toFixed(2)} €`;
     }
+    ;
     form.addEventListener('input', () => {
         var _a, _b, _c;
         const mezzoId = (_c = (_b = (_a = form.querySelector('h4')) === null || _a === void 0 ? void 0 : _a.textContent) === null || _b === void 0 ? void 0 : _b.match(/ID: (\w+)/)) === null || _c === void 0 ? void 0 : _c[1];
@@ -309,6 +335,8 @@ document.addEventListener("DOMContentLoaded", () => {
             mezziInfo.style.display = 'flex';
         }
     }
+    ;
+    //popup pagamento confermato
     const popupOverlay = document.getElementById('popupOverlay');
     const popup = document.getElementById('popup');
     const closePopup = document.getElementById('closePopup');
@@ -318,9 +346,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const popupMetodoPagamento = document.getElementById('popupMetodoPagamento');
     const popupTotale = document.getElementById('popupTotale');
     function showPopup(nome, cognome, email, metodoPagamento, totale) {
-        /*function capitalizeFirstLetter(string: string){
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        };*/
         popupNome.textContent = `Nome: ${capitalizeFirstLetter(nome)}`;
         popupCognome.textContent = `Cognome: ${capitalizeFirstLetter(cognome)}`;
         popupEmail.textContent = `Email: ${email}`;
@@ -335,6 +360,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     closePopup.addEventListener('click', hidePopup);
     popupOverlay.addEventListener('click', hidePopup);
+    //invio form di prenotazione
     form.addEventListener('submit', (event) => {
         var _a, _b, _c;
         event.preventDefault();
@@ -369,7 +395,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log(`Prenotazione confermata: ${nome} ${cognome}, ${email}, metodo di pagamento: ${metodoPagamento}, totale: ${totale}€`);
                 form.style.display = 'none';
                 aggiornaMezziDiv(selectedCitta);
+                form.reset();
             }
         }
+    });
+    const closeForm = document.getElementById('closeForm');
+    closeForm === null || closeForm === void 0 ? void 0 : closeForm.addEventListener('click', () => {
+        form.style.display = 'none';
     });
 });
