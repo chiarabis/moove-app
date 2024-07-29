@@ -42,7 +42,7 @@ form input[type="number"]{
 .form-container{
     margin: 0.5rem 0;
 }
-.prenotaMezzoBtn, .formBtn{
+.submitBtn, .prenotaBtn{
     cursor: pointer;
     border-radius: 1rem;
     border: 1px solid rgb(18, 89, 22);
@@ -53,7 +53,7 @@ form input[type="number"]{
     color: rgb(18, 89, 22);
     width: fit-content;
 }
-.prenotaMezzoBtn:hover, .prenotaMezzoBtn:active, .formBtn:hover, .formBtn:active{
+.submitBtn:hover, .submitBtn:active, .prenotaBtn:hover, .prenotaBtn:active{
     background-color: rgb(18, 89, 22);
     color: rgb(245, 245, 245);
 }

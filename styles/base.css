@@ -58,6 +58,7 @@ h1{
 .hamburger{
     display: none;
     width: 40px;
+    cursor: pointer;
 }
 main{
     display: flex;
