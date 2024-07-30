@@ -133,11 +133,47 @@ class Citta implements ICitta{
     }
 }
 ```
+
+---
+## Configurazione delle dipendenze
+1. Installazione di TypeScript ```npm install -g typescript```. Il comando ```tsc``` compilerà i file Typescript in file Javascript.
+2. Su VS Code installare l'estensione ```Live Server``` per avviare il server locale di sviluppo.
+3. Nel ```tsconfig.json``` settare ```"allowImportingTsExtensions": true``` per permettere l'importazione dei file con estensione .ts. Deve essere settato anche ```noEmit: true``` (o in alternativa ```emitDeclarationOnly: true```).
+
+NB: Se non fosse già presente è necessario installare anche Node.js.
+
+---
+## Struttura del progetto
+```
+.root
+├── assets
+│   └── ... (file di risorse)
+├── styles
+│   └── ... (file CSS)
+├── dist
+│   ├── models
+│   │      └── ...
+│   ├── utils       
+│   │      └── ...
+│   └── app.js
+│   └── main.js
+├── src
+│   ├── models
+│   │      └── ...
+│   ├── utils
+│   │      └── ...
+│   ├── app.ts
+│   └── main.ts
+├── .gitignore
+├── index.html
+├── package.json
+├── package-lock.json
+└── tsconfig.json
+```
+
 ---
 ## Deploy
 ![Progetto senza titolo (8)](https://github.com/user-attachments/assets/f86d299d-cb2e-4f17-867c-c2552d523b5b)
-
-> Per il deploy su Netlify impostare la configurazione ```Publish directory: dist``` in modo che vengano pubblicati direttamente i file Javascript per il deploy nella cartella 'dist'. Se i file js compilati sono già stati generati non è necessario impostare un comando di build specifico.
 
 [Clicca qui](https://mooveapp.netlify.app/) per vedere il progetto in live 🌐
 
