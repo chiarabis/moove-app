@@ -1,0 +1,15 @@
+{
+  "name": "progetto-typescript---chiara-bissolo",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && cp -r assets dist/assets && cp -r styles dist/styles && cp index.html dist/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}
