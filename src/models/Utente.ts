@@ -1,5 +1,5 @@
-import { IUtente } from "./IUtente";
-import { IMezzo } from "./IMezzo";
+import { IUtente } from "./IUtente.ts";
+import { IMezzo } from "./IMezzo.ts";
 
 export class Utente implements IUtente{
     nome: string;

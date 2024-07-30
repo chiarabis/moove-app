@@ -1,10 +1,10 @@
-import { utenti, citta } from "./main.js";
-import { getElementById, getElementByClass, capitalizeFirstLetter } from "./utils/domUtils.js";
-import { handleHamburgerMenu } from './utils/menu.js';
-import { Citta } from "./models/Citta.js";
-import { Mezzo } from './models/Mezzo.js';
-import { generaIdMezzo } from './utils/counters.js';
-import { handleCloseForm, handleFormInput, handleFormSubmit } from './utils/formHandler.js';
+import { utenti, citta } from "./main.ts";
+import { getElementById, getElementByClass, capitalizeFirstLetter } from "./utils/domUtils.ts";
+import { handleHamburgerMenu } from './utils/menu.ts';
+import { Citta } from "./models/Citta.ts";
+import { Mezzo } from './models/Mezzo.ts';
+import { generaIdMezzo } from './utils/counters.ts';
+import { handleCloseForm, handleFormInput, handleFormSubmit } from './utils/formHandler.ts';
 
 document.addEventListener("DOMContentLoaded", () => {
     const selectCitta = getElementById<HTMLSelectElement>('citta');

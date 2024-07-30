@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter, getElementById } from './domUtils.js';
+import { capitalizeFirstLetter, getElementById } from './domUtils.ts';
 
 const popupOverlay = getElementById<HTMLDivElement>('popupOverlay');
 const popup = getElementById<HTMLDivElement>('popup');

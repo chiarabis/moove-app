@@ -1,4 +1,4 @@
-import { IMezzo } from "./IMezzo";
+import { IMezzo } from "./IMezzo.ts";
 
 export interface IUtente{
     nome: string;

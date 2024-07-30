@@ -13,10 +13,3 @@ export function getElementByClass<T extends HTMLElement>(className: string): T {
     if (!element) throw new Error(`Element with class ${className} not found`);
     return element as T;
 };
-
-/*export function createOption(value: string, text: string): HTMLOptionElement {
-    const option = document.createElement('option');
-    option.value = value;
-    option.textContent = text;
-    return option;
-};*/

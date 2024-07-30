@@ -1,6 +1,6 @@
-import { Mezzo } from "../models/Mezzo.js";
+import { Mezzo } from "../models/Mezzo.ts";
 
-export function getRates(mezzo: Mezzo, totalAmount: HTMLParagraphElement) { //mezzo: Mezzo
+export function getRates(mezzo: Mezzo, totalAmount: HTMLParagraphElement) {
     const tariffa = (document.querySelector('input[name="tariffa"]:checked') as HTMLInputElement).value;
     let totale = 0;
 
