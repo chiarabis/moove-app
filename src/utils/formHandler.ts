@@ -1,8 +1,8 @@
-import { Citta } from '../models/Citta.js';
-import { Utente } from '../models/Utente.js';
-import { showPopup } from './popupHandler.js';
-import { handleRequiredRate, getRates } from './rateUtils.js';
-import { getElementById } from './domUtils.js';
+import { Citta } from '../models/Citta.ts';
+import { Utente } from '../models/Utente.ts';
+import { showPopup } from './popupHandler.ts';
+import { handleRequiredRate, getRates } from './rateUtils.ts';
+import { getElementById } from './domUtils.ts';
 
 export function handleFormSubmit(
     form: HTMLFormElement, 

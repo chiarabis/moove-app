@@ -1,6 +1,6 @@
-import { Mezzo } from "./models/Mezzo.js";
-import { Utente } from "./models/Utente.js";
-import { Citta } from "./models/Citta.js";
+import { Mezzo } from "./models/Mezzo.ts";
+import { Utente } from "./models/Utente.ts";
+import { Citta } from "./models/Citta.ts";
 
 import { aggiornaContatoriGlobali } from "./utils/counters.js";
 
