@@ -1,4 +1,4 @@
-import { IUtente } from "./IUtente.ts";
+import { IUtente } from "./IUtente";
 
 export interface IMezzo {
     id: string;
