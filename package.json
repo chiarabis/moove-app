@@ -4,12 +4,13 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && copy src\\index.html dist\\index.html && xcopy /s src\\styles\\* dist\\styles\\ && xcopy /s src\\assets\\* dist\\assets\\"
+    "build": "tsc && copyfiles -u 1 src/index.html dist/index.html && copyfiles -u 1 src/styles/**/* dist/styles && copyfiles -u 1 src/assets/**/* dist/assets"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "typescript": "^5.5.4"
   }
 }
