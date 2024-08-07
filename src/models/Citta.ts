@@ -1,5 +1,5 @@
-import { ICitta } from "./ICitta.ts";
-import { IMezzo } from "./IMezzo.ts";
+import { ICitta } from "./ICitta";
+import { IMezzo } from "./IMezzo";
 
 export class Citta implements ICitta{
     nome: string;
