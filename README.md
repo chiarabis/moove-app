@@ -185,6 +185,7 @@ class Citta implements ICitta{
 │   │      └── ...
 │   ├── utils       
 │   │      └── ...
+│   ├── index.html
 │   └── app.js
 │   └── main.js
 ├── src
@@ -192,11 +193,11 @@ class Citta implements ICitta{
 │   │      └── ...
 │   ├── utils
 │   │      └── ...
+│   ├── index.html
 │   ├── app.ts
 │   └── main.ts
 ├── .gitignore
 ├── netlify.toml
-├── index.html
 ├── package.json
 ├── package-lock.json
 └── tsconfig.json
