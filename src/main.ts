@@ -1,8 +1,8 @@
-import { Mezzo } from "./models/Mezzo.ts";
-import { Utente } from "./models/Utente.ts";
-import { Citta } from "./models/Citta.ts";
+import { Mezzo } from "./models/Mezzo";
+import { Utente } from "./models/Utente";
+import { Citta } from "./models/Citta";
 
-import { aggiornaContatoriGlobali } from "./utils/counters.js";
+import { aggiornaContatoriGlobali } from "./utils/counters";
 
 //istanza di alcuni mezzi
 const mezzi: {[key: string]: Mezzo} = {
