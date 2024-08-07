@@ -8,7 +8,7 @@ Attraverso la definizione di interfacce e classi ho rappresentato i tre componen
 ### Interfacce:
 1. Interfaccia IMezzo per rappresentare i mezzi di trasporto (bici, scooter, monopattini elettrici).
 - Proprietà: ID univoco, tipo (se bici, scooter o monopattino), stato (se il mezzo è disponibile o in uso), l'utente assegnato se è in uso, se è stato aggiunto da un utente o no e la tariffa oraria.
-- Metodi: ```assegnaUtente(utente: IUtente): void``` per assegnare un mezzo a un utente specifico, ```getTariffaGiornaliera(): number``` e ```getTariffaMensile(): number``` per calcolare rispettivamente il costo giornaliero e mensile.
+- Metodi: `assegnaUtente(utente: IUtente): void` per assegnare un mezzo a un utente specifico, `getTariffaGiornaliera(): number` e `getTariffaMensile(): number` per calcolare rispettivamente il costo giornaliero e mensile.
 ```typescript
 interface IMezzo {
     id: string;
@@ -25,7 +25,7 @@ interface IMezzo {
 ```
 2. Interfaccia IUtente per rappresentare gli utenti del servizio.
 - Proprietà: nome, cognome, email e metodo di pagamento preferito.
-- Metodo: ```prenotaMezzo(mezzo: IMezzo): void``` per prenotare un mezzo.
+- Metodo: `prenotaMezzo(mezzo: IMezzo): void` per prenotare un mezzo.
 ```typescript
 interface IUtente{
     nome: string;
@@ -38,7 +38,7 @@ interface IUtente{
 ```
 3. Interfaccia ICitta per rappresentare appunto le città in cui Moove opera.
 - Proprietà: nome della città ed elenco dei mezzi disponibili (IMezzo[]).
-- Metodi: ```aggiungiMezzo(mezzo: IMezzo): void``` e ```rimuoviMezzo(id: string): void``` per aggiungere e rimuovere i mezzi.
+- Metodi: `aggiungiMezzo(mezzo: IMezzo): void` e `rimuoviMezzo(id: string): void` per aggiungere e rimuovere i mezzi.
 ```typescript
 interface ICitta{
     nome: string;
@@ -136,11 +136,41 @@ class Citta implements ICitta{
 
 ---
 ## Configurazione delle dipendenze
-1. Installazione di TypeScript ```npm install -g typescript```. Il comando ```tsc``` compilerà i file Typescript in file Javascript.
-2. Su VS Code installare l'estensione ```Live Server``` per avviare il server locale di sviluppo.
-3. Nel ```tsconfig.json``` settare ```"allowImportingTsExtensions": true``` per permettere l'importazione dei file con estensione .ts. Deve essere settato anche ```noEmit: true``` (o in alternativa ```emitDeclarationOnly: true```).
+1. Installazione di TypeScript `npm install -g typescript`.
+> [!NOTE]
+> Se non fosse già presente è necessario installare anche Node.js.
+2. Nel *tsconfig.json* settare queste impostazioni:
+```json
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ES6",
+    "rootDir": "./src",                                  
+    "moduleResolution": "Node",                         
+    //"allowImportingTsExtensions": true,
+    //"noEmit": true,
+    "outDir": "./dist", 
+    "esModuleInterop": true,                             
+    "forceConsistentCasingInFileNames": true, 
+    "strict": true,                                      
+    "skipLibCheck": true                                
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+```
+> [!NOTE]
+> `"allowImportingTsExtensions"` e `"noEmit"` devono essere tolti o impostati su false altrimenti la cartella *dist* non verrà creata (TypeScript non emetterà file di output!). Durante le importazioni dei moduli nei file TypeScript non indicare le estensioni:
+> - [x] `import { utenti, citta } from "./main";`
+> - [ ] `import { utenti, citta } from "./main.ts";`
 
-NB: Se non fosse già presente è necessario installare anche Node.js.
+3. Su VS Code installare l'estensione **Live Server** per avviare il server locale di sviluppo.
+4. Creazione di un file *netlify.toml* per configurare Netlify affinchè esegua il processo di build direttamente. In questo modo, Netlify compila i file TypeScript e li utilizza per il deploy senza la necessità di includere la cartella con i file compilati nel repository.
+```
+[build]
+  command = "npm run build" #comando per compilare i file TypeScript
+  publish = "dist" #cartella con i file compilati
+```
 
 ---
 ## Struttura del progetto
@@ -165,6 +195,7 @@ NB: Se non fosse già presente è necessario installare anche Node.js.
 │   ├── app.ts
 │   └── main.ts
 ├── .gitignore
+├── netlify.toml
 ├── index.html
 ├── package.json
 ├── package-lock.json
