@@ -1,4 +1,4 @@
-import { Mezzo } from "../models/Mezzo.ts";
+import { Mezzo } from "../models/Mezzo";
 
 //creazione di un contatore per gli id dei mezzi (generazione id incrementali automatici)
 export const globalMezzoCounters: { [key: string]: number } = {
