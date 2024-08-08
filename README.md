@@ -180,14 +180,7 @@ class Citta implements ICitta{
 │   └── ... (file di risorse)
 ├── styles
 │   └── ... (file CSS)
-├── dist
-│   ├── models
-│   │      └── ...
-│   ├── utils       
-│   │      └── ...
-│   ├── index.html
-│   └── app.js
-│   └── main.js
+├── dist ── ... //creata con il comando di build
 ├── src
 │   ├── models
 │   │      └── ...
