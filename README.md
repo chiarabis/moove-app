@@ -165,7 +165,13 @@ class Citta implements ICitta{
 > - [ ] `import { utenti, citta } from "./main.ts";`
 
 3. Su VS Code installare l'estensione **Live Server** per avviare il server locale di sviluppo.
-4. Creazione di un file *netlify.toml* per configurare Netlify affinchè esegua il processo di build direttamente. In questo modo, Netlify compila i file TypeScript e li utilizza per il deploy senza la necessità di includere la cartella con i file compilati nel repository.
+4. Nel *package.json* è necessario avere uno script di build che oltre a compilare i file .ts (comando `tsc`), copi anche i file statici (quelli con le risorse utili al progetto, immagini, icone, fogli di stile ecc...). Io ho usato `copyfiles` per comodità.
+```
+"scripts": {
+    "build": "tsc && copyfiles -u 1 src/index.html dist && copyfiles -u 1 src/styles/* dist && copyfiles -u 1 src/assets/* dist && copyfiles -u 1 src/assets/favicon_io/* dist"
+}
+```
+5. Creazione di un file *netlify.toml* per configurare Netlify affinchè esegua il processo di build direttamente. In questo modo, Netlify compila i file TypeScript e li utilizza per il deploy senza la necessità di includere la cartella con i file compilati nel repository.
 ```
 [build]
   command = "npm run build" #comando per compilare i file TypeScript
@@ -176,19 +182,19 @@ class Citta implements ICitta{
 ## Struttura del progetto
 ```
 .root
-├── assets
-│   └── ... (file di risorse)
-├── styles
-│   └── ... (file CSS)
 ├── dist ── ... //creata con il comando di build
 ├── src
-│   ├── models
-│   │      └── ...
-│   ├── utils
-│   │      └── ...
-│   ├── index.html
-│   ├── app.ts
-│   └── main.ts
+│    ├── assets
+│    │       └── ... (file di risorse)
+│    ├── styles
+│    │       └── ... (file CSS)   
+│    ├── models
+│    │       └── ... (moduli)
+│    ├── utils
+│    │       └── ... (moduli)
+│    ├── index.html
+│    ├── app.ts
+│    └── main.ts
 ├── .gitignore
 ├── netlify.toml
 ├── package.json
@@ -201,5 +207,7 @@ class Citta implements ICitta{
 ![Progetto senza titolo (8)](https://github.com/user-attachments/assets/f86d299d-cb2e-4f17-867c-c2552d523b5b)
 
 [Clicca qui](https://mooveapp.netlify.app/) per vedere il progetto in live 🌐
-
 _Deploy by Netlify_
+
+> [!WARNING]
+> Attualmente ho problemi con le importazioni dei moduli. Nonostante il deploy su Netlify vada a buon fine l'applicazione non funziona (**"Failed to load resource: the server responded with a status of 404 ()"**). Sto cercando di capire il problema e come risolverlo 🚧
