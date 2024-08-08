@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && copyfiles -u 1 src/index.html dist && copyfiles -u 1 src/styles/* dist && copyfiles -u 1 src/assets/**/* dist"
+    "build": "tsc && copyfiles -u 1 src/index.html dist && copyfiles -u 1 src/styles/* dist && copyfiles -u 1 src/assets/* dist && copyfiles -u 1 src/assets/favicon_io/* dist"
   },
   "keywords": [],
   "author": "",
