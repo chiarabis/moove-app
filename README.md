@@ -136,43 +136,69 @@ class Citta implements ICitta{
 
 ---
 ## Configurazione delle dipendenze
-1. Installazione di TypeScript `npm install -g typescript`.
+1. Installazione di TypeScript `npm install --save-dev typescript`.
+2. Installazione di Vite (o di un qualsiasi altro bundler ad esempio Webpack) per la risoluzione dei moduli `npm install --save-dev vite`.
+3. Installazione dei tipi di Node.js `npm install --save-dev types@node`, in modo che TypeScript sappia che si sta lavorando in ambiente Node.js. È possibile così utilizzare *__dirname* e *path* nel file di configurazione di Vite.
 > [!NOTE]
 > Se non fosse già presente è necessario installare anche Node.js.
-2. Nel *tsconfig.json* settare queste impostazioni:
+
+4. Nel *tsconfig.json* settare queste impostazioni:
 ```json
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "ES6",
+    "target": "ES6",                                         
+    "module": "ES6",                                     
     "rootDir": "./src",                                  
-    "moduleResolution": "Node",                         
-    //"allowImportingTsExtensions": true,
-    //"noEmit": true,
-    "outDir": "./dist", 
-    "esModuleInterop": true,                             
-    "forceConsistentCasingInFileNames": true, 
-    "strict": true,                                      
-    "skipLibCheck": true                                
+    "moduleResolution": "Node",
+    "baseUrl": "./",                                  
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["node"],      //inclusione dei tipi di Node.js
+    "outDir": "./dist",      //dove Vite scriverà i file di output
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,                       
+    "strict": true,                                     
+    "skipLibCheck": true                                 
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }
 ```
-> [!NOTE]
-> `"allowImportingTsExtensions"` e `"noEmit"` devono essere tolti o impostati su false altrimenti la cartella *dist* non verrà creata (TypeScript non emetterà file di output!). Durante le importazioni dei moduli nei file TypeScript non indicare le estensioni:
-> - [x] `import { utenti, citta } from "./main";`
-> - [ ] `import { utenti, citta } from "./main.ts";`
 
-3. Su VS Code installare l'estensione **Live Server** per avviare il server locale di sviluppo.
-4. Nel *package.json* è necessario avere uno script di build che oltre a compilare i file .ts (comando `tsc`), copi anche i file statici (quelli con le risorse utili al progetto, immagini, icone, fogli di stile ecc...). Io ho usato `copyfiles` per comodità.
+5. Configurare il file *vite.config.ts*:
+```typescript
+import { defineConfig } from 'vite';
+import path from 'path';
+export default defineConfig({
+    root: './',        //la root del progetto (dove si trova index.html)
+    base: './',
+    resolve: {
+        alias: {
+        '@': path.resolve(__dirname, './src'),
+        },
+    },
+    build: {
+        outDir: 'dist',    //directory di output per la build
+        sourcemap: true,    //generazione di mappe di sorgenti per il debugging
+        emptyOutDir: true,    //svuota la cartella dist prima della build
+        rollupOptions: {
+            input: './index.html',    //punto di ingresso principale
+        },
+    },
+    server: {
+        open: true,    //apre il browser in automatico
+    },
+});
 ```
-"scripts": {
-    "build": "tsc && copyfiles -u 1 src/index.html dist && copyfiles -u 1 src/styles/* dist && copyfiles -u 1 src/assets/* dist && copyfiles -u 1 src/assets/favicon_io/* dist"
-}
+
+6. Nel file *index.html* includere nello script il file di ingresso (nel mio caso è `app.ts`):
+```html
+<script src="./src/app.ts" type="module"></script>
 ```
-5. Creazione di un file *netlify.toml* per configurare Netlify affinchè esegua il processo di build direttamente. In questo modo, Netlify compila i file TypeScript e li utilizza per il deploy senza la necessità di includere la cartella con i file compilati nel repository.
-```
+
+7. Creazione di un file *netlify.toml* per configurare Netlify affinchè esegua il processo di build direttamente. In questo modo, Netlify compila i file TypeScript e li utilizza per il deploy senza la necessità di includere la cartella con i file compilati nel repository.
+```toml
 [build]
   command = "npm run build" #comando per compilare i file TypeScript
   publish = "dist" #cartella con i file compilati
@@ -180,25 +206,27 @@ class Citta implements ICitta{
 
 ---
 ## Struttura del progetto
+> [!IMPORTANT]
+> Vite si aspetta di trovare il file *index.html* nella root del progetto, mentre è consigliabile tenere tutti i file TypeScript, i componenti, le risorse e i fogli di stile in una cartella *src*.
 ```
 .root
-├── dist ── ... //creata con il comando di build
 ├── src
 │    ├── assets
-│    │       └── ... (file di risorse)
+│    │       └── ... (risorse)
 │    ├── styles
-│    │       └── ... (file CSS)   
+│    │       └── ... (CSS)   
 │    ├── models
 │    │       └── ... (moduli)
 │    ├── utils
 │    │       └── ... (moduli)
-│    ├── index.html
-│    ├── app.ts
+│    ├── app.ts //file di ingresso
 │    └── main.ts
 ├── .gitignore
+├── index.html
 ├── netlify.toml
 ├── package.json
 ├── package-lock.json
+├── vite.config.ts
 └── tsconfig.json
 ```
 
@@ -208,6 +236,3 @@ class Citta implements ICitta{
 
 [Clicca qui](https://mooveapp.netlify.app/) per vedere il progetto in live 🌐
 _Deploy by Netlify_
-
-> [!WARNING]
-> Attualmente ho problemi con le importazioni dei moduli. Nonostante il deploy su Netlify vada a buon fine l'applicazione non funziona (**"Failed to load resource: the server responded with a status of 404 ()"**). Sto cercando di capire il problema e come risolverlo 🚧
