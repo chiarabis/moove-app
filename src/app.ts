@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <span style="margin: 0 10px; color: rgb(9,181,32);">●</span>
                         <button class="prenotaBtn" data-id="${mezzo.id}">Prenota</button>
-                        ${mezzo.aggiuntoDaUtente ? `<button class="rimuoviMezzoBtn" data-id="${mezzo.id}"><img src="./assets/bin.png"/></button>` : ''}
+                        ${mezzo.aggiuntoDaUtente ? `<button class="rimuoviMezzoBtn" data-id="${mezzo.id}"><img src="./src/assets/bin.png"/></button>` : ''}
                     </div>`;
             } else {
                 let userHTML = '';
