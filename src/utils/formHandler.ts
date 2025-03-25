@@ -12,6 +12,7 @@ export function handleFormSubmit(
     aggiornaMezziDiv: (citta: Citta) => void
 ): void {
     form.addEventListener('submit', (event) => {
+        event.preventDefault();
         const selectedCitta = citta[selectCitta.value];
 
         if (selectedCitta) {
