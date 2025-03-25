@@ -14,11 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalAmount = getElementById<HTMLParagraphElement>('totale');
     const mezziDisponibiliDiv = getElementById<HTMLDivElement>('mezziDisponibili');
     const tipoMezzoSelect = getElementById<HTMLSelectElement>('tipoMezzo');
-    const hamburger = getElementByClass<HTMLDivElement>('hamburger');
-    const navMenu = getElementByClass<HTMLUListElement>('nav-menu');
-    const hamburgerIcon = getElementById<HTMLImageElement>('hamburger-icon');
-
-    handleHamburgerMenu(hamburger, navMenu, hamburgerIcon);
+    
+    
     handleFormSubmit(form, selectCitta, citta, utenti, aggiornaMezziDiv);
     handleFormInput(form, selectCitta, citta, totalAmount);
     handleCloseForm(form);
@@ -88,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <span style="margin: 0 10px; color: rgb(9,181,32);">●</span>
                         <button class="prenotaBtn" data-id="${mezzo.id}">Prenota</button>
-                        ${mezzo.aggiuntoDaUtente ? `<button class="rimuoviMezzoBtn" data-id="${mezzo.id}"><img src="./assets/bin.png"/></button>` : ''}
+                        ${mezzo.aggiuntoDaUtente ? `<button class="rimuoviMezzoBtn" data-id="${mezzo.id}"><img src="./src/assets/bin.png"/></button>` : ''}
                     </div>`;
             } else {
                 let userHTML = '';
