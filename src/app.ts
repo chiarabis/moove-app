@@ -14,11 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalAmount = getElementById<HTMLParagraphElement>('totale');
     const mezziDisponibiliDiv = getElementById<HTMLDivElement>('mezziDisponibili');
     const tipoMezzoSelect = getElementById<HTMLSelectElement>('tipoMezzo');
-    const hamburger = getElementByClass<HTMLDivElement>('hamburger');
-    const navMenu = getElementByClass<HTMLUListElement>('nav-menu');
-    const hamburgerIcon = getElementById<HTMLImageElement>('hamburger-icon');
-
-    handleHamburgerMenu(hamburger, navMenu, hamburgerIcon);
+    
+    
     handleFormSubmit(form, selectCitta, citta, utenti, aggiornaMezziDiv);
     handleFormInput(form, selectCitta, citta, totalAmount);
     handleCloseForm(form);

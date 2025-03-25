@@ -35,31 +35,6 @@ h1{
 .title img{
     height: 90px;
 }
-.nav-menu{
-    list-style-type:none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 350px;
-    transform: translateY(-8px);
-    z-index: 10;
-}
-.nav-menu li{
-    cursor: pointer;
-    border-radius: 80px;
-    border: 1px solid rgb(18, 89, 22);
-    padding: 5px 10px;
-}
-.nav-menu li:hover{
-    background-color: rgb(18, 89, 22);
-    color: rgb(245,245,245);
-}
-.hamburger{
-    display: none;
-    width: 40px;
-    cursor: pointer;
-}
 main{
     display: flex;
     flex-direction: column;
